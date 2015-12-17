@@ -10,4 +10,5 @@ deploy:
     secure: Y2Cut+IyWheh/h0GWIK5uzCHgirPGD/oECpu+3R9xXFThc8NgNy7VdUbwQEvTH0X6p1D8T6LSyRVA+YW71HSP2LrUbCYAHEVRNeiqESssa+vinp2CyI0tDcO0ONaajXLobXD+DPxjOhJbk2+VmhxY2WN4b1iDKJZMoErxJP8e+QCS8a5QagOEnD1BdOn1GH6aTsA6GzsbhlbmmzMoxHLhCQDLqY/qKYs3hfMA1+aZooaM0eaZbH4YKbAEWqYALTmc8gaEMVO2gu+XBfzy2yGcL7cvYwSuZpF4fa1Z9FNPXDlsD6Y16rEgUHqIoZWlF6YICUzr/vbEiE317BnqJKwVnusn4c2buLIyR0/UL0Fuv/MOgtciSmn6I2/Zr9OK9+bZBLiintds5LzWGI3/RNvacpv1XU1/uT8pEKR7SY25Dc4c8MmvVox7cSUVIb1SIuvkvJuJScbss9O00Bd1+h2+hX7cEpN5gYtNDqa6+4d8Pc0rId6RFqHQQa6ijGg1c+2No4Ym97LV65khTEANiQUfUkfBQQIBPZctgDtW7LD6JGQjbz/bHkX0OakMQZaf72SmNm/fwpmnS/SgYQkHFsSFtNYbyfumqgVXEtjJUBoEYFK1qvRc6hO02U6ck9pONKOa9nyAnl2e01bWjrEilWcvFD6UhWc/cSl4j0LgL1SCrM=
   on:
     tags: true
+    branches: true
     repo: octoblu/meshblu-core-task-search-device

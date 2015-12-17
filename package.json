@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-search-device",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Search for devices, using the unstoppable Meshblu CORE",
   "main": "index.js",
   "scripts": {
