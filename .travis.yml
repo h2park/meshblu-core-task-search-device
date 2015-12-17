@@ -1,12 +1,10 @@
 language: node_js
 node_js:
 - '5'
-before_script:
-- npm install -g codeclimate-test-reporter
+
 services:
 - mongodb
-after_script:
-- codeclimate-test-reporter < coverage/lcov.info
+
 deploy:
   provider: npm
   email: serveradmin@octoblu.com
@@ -14,4 +12,5 @@ deploy:
     secure: HXn06K7hAkcJZrpT6XpLfQIowhrOu2j0OvbtjbmV5Z1sXK/l3aZEpcuerkEWT/w/+fMfomsQbC1V5mV3fUUw6cwIaDvYdZ68e2hFvOdpUkIyvlNCP9uR/MsoCGS7CxRcX6iv056mrZcLAakqae6noUmB3gvXrF1zV20y5/fZJolG0C8czk6S6bfqbN99GML3DkqCpUG+I2AvsI4Q+7HxRjSLYoZlxC1Piqcx7AudHvlX/oGKvOLX1c8140XvyQyKT7tJxYHDv3+eWR492l4ITHH90GFz9A7oPF/lqMWwxTSzKUsG2CJunwjJVag78LGlfn77wFkl6/0l/Db46RXoyUHuK7NP6dXqwQ2767THjnTIq2C42P/sxmM3391WKJK5Wm07v91TGE8ZZAmRJZcLa1b2dyzEZUwlW0j/iKSEiNYgh6QUAq9eXJWZ9e3Bxe4iPa6iwMO4Dt5K2fuCb36jtsp9RKPp2VBkgqC+QQOu+34Q3RIdp810L1RVnaMAGO9nnyKMFsjsr/LVzAEcRcSNsYMl0Be8/U9Lo1QIdS4Do74/YWonPFWE+bFh3SOkLV3OK1hxRXsA+WRvPhM3pLXWlioaC1seX+VMBGLVI/xNvQf94NKh41PMbS3kyenAACLHf3Nt8zyu3nt3IiBiloZNz6hIIyVBCmLdpc0I7CVWV4Q=
   on:
     tags: true
+    branches: true
     repo: octoblu/meshblu-core-task-search-device
