@@ -1,0 +1,43 @@
+{
+  "name": "meshblu-core-task-search-device",
+  "version": "1.0.1",
+  "description": "Search for devices, using the unstoppable Meshblu CORE",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octoblu/meshblu-core-task-search-device.git"
+  },
+  "keywords": [
+    "meshblu",
+    "IoT",
+    "octoblu"
+  ],
+  "author": "serveradmin@octoblu.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octoblu/meshblu-core-task-search-device/issues"
+  },
+  "homepage": "https://github.com/octoblu/meshblu-core-task-search-device#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-subset": "^1.2.0",
+    "coffee-coverage": "^0.7.0",
+    "coffee-script": "^1.10.0",
+    "istanbul": "^0.4.1",
+    "meshblu-core-datastore": "^2.2.0",
+    "mocha": "^2.3.4",
+    "mocha-istanbul": "^0.2.0",
+    "moment": "^2.10.6",
+    "mongojs": "^2.2.2",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "async": "^1.5.0",
+    "lodash": "^3.10.1",
+    "meshblu-core-manager-whitelist": "^2.0.2"
+  }
+}
