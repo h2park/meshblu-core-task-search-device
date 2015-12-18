@@ -103,7 +103,7 @@ describe 'SearchDevice', ->
         dinosaurDevices = JSON.parse @response.rawData
         expect(dinosaurDevices.length).to.equal 2
 
-    describe 'when called with a query that returns 2000 devices', ->
+    xdescribe 'when called with a query that returns 2000 devices', ->
       beforeEach 'insert records', (done)->
         dinosaurs = _.times 2000, =>
           uuid: _.uniqueId()
