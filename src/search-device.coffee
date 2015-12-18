@@ -15,7 +15,7 @@ class SearchDevice
     catch error
       return callback null, @_getEmptyResponse 422
 
-    @datastore.find deviceQuery, (error, devices) =>
+    finish = (error, devices) =>
       discoverFilter = @_getCanDiscoverFilter fromUuid
 
       async.filter devices, discoverFilter, (discoverableDevices) =>
@@ -23,6 +23,8 @@ class SearchDevice
           metadata: code: 200
           rawData: JSON.stringify discoverableDevices
         callback null, response
+
+    @datastore.find(deviceQuery, finish).limit 1000
 
   _getCanDiscoverFilter: (fromUuid) =>
     return (device, callback) =>

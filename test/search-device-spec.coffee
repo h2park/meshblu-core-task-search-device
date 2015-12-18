@@ -103,7 +103,7 @@ describe 'SearchDevice', ->
         dinosaurDevices = JSON.parse @response.rawData
         expect(dinosaurDevices.length).to.equal 2
 
-    xdescribe 'when called with a query that returns 2000 devices', ->
+    describe 'when called with a query that returns 2000 devices', ->
       beforeEach 'insert records', (done)->
         dinosaurs = _.times 2000, =>
           uuid: _.uniqueId()
@@ -117,6 +117,7 @@ describe 'SearchDevice', ->
         query = type: 'dinosaur'
         request =
           metadata:
+            auth: @auth
             responseId: 'archaeology-dig-2'
           rawData: JSON.stringify query
 
