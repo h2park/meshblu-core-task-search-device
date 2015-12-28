@@ -44,6 +44,7 @@ describe 'SearchDevice', ->
           token: 'are-awesome'
           name: 'bitey'
           type: 'dinosaur'
+          discoverWhitelist: ['*']
         @datastore.insert [record], done
 
       beforeEach (done) ->
@@ -70,18 +71,19 @@ describe 'SearchDevice', ->
           token: 'are-awesome'
           name: 'bitey'
           type: 'dinosaur'
+          discoverWhitelist: ['archaeologist']
 
         trex =
           uuid: 'trex'
           token: 'are-also-awesome'
           name: 'bitey'
           type: 'dinosaur'
+          discoverWhitelist: ['archaeologist']
 
         hideosaur =
           uuid: 'hideosaur'
           token: 'are-also-awesome'
           name: 'Hidden'
-          discoverWhitelist: []
           type: 'dinosaur'
 
         @datastore.insert [velociraptor, trex, hideosaur], done
@@ -103,13 +105,14 @@ describe 'SearchDevice', ->
         dinosaurDevices = JSON.parse @response.rawData
         expect(dinosaurDevices.length).to.equal 2
 
-    xdescribe 'when called with a query that returns 2000 devices', ->
+    describe 'when called with a query that returns 2000 devices', ->
       beforeEach 'insert records', (done)->
         dinosaurs = _.times 2000, =>
           uuid: _.uniqueId()
           token: 'are-awesome'
           name: 'bitey'
           type: 'dinosaur'
+          discoverWhitelist: ['*']
 
         @datastore.insert dinosaurs, done
 

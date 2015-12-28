@@ -1,10 +1,8 @@
 http = require 'http'
 _    = require 'lodash'
 async = require 'async'
-WhitelistManager = require 'meshblu-core-manager-whitelist'
 class SearchDevice
   constructor: ({@datastore,@uuidAliasResolver}) ->
-    @whitelistManager = new WhitelistManager {@datastore, @uuidAliasResolver}
 
   do: (request, callback) =>
     {fromUuid, auth} = request.metadata
@@ -15,18 +13,26 @@ class SearchDevice
     catch error
       return callback null, @_getEmptyResponse 422
 
-    @datastore.find deviceQuery, (error, devices) =>
-      discoverFilter = @_getCanDiscoverFilter fromUuid
+    deviceQuery = {} unless _.isPlainObject(deviceQuery)
+    deviceQuery["$or"] = [
+      {
+        uuid: fromUuid
+      },
+      {
+        discoverWhitelist: $in: [fromUuid, '*']
+      }
+      {
+        owner: fromUuid
+      }
+    ]
 
-      async.filter devices, discoverFilter, (discoverableDevices) =>
-        response =
-          metadata: code: 200
-          rawData: JSON.stringify discoverableDevices
-        callback null, response
-    
-  _getCanDiscoverFilter: (fromUuid) =>
-    return (device, callback) =>
-      return @whitelistManager.canDiscover fromUuid: fromUuid, toUuid: device.uuid, (error, canDiscover) => callback canDiscover
+    @datastore.find(deviceQuery, (error, devices) =>
+      response =
+        metadata: code: 200
+        rawData: JSON.stringify devices
+
+      callback null, response
+    ).limit(1000)
 
   _getEmptyResponse: (code) =>
     response =
