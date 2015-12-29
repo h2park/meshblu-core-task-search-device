@@ -4,16 +4,16 @@ async = require 'async'
 DeviceDatastore = require 'meshblu-core-datastore-device'
 
 class SearchDevice
-  constructor: ({@meshbluDatastore, @uuidAliasResolver}) ->
+  constructor: ({@datastore, @uuidAliasResolver}) ->
 
   do: (request, callback) =>
     {fromUuid, auth} = request.metadata
     fromUuid ?= auth.uuid
 
     @deviceDatastore = new DeviceDatastore
-      meshbluDatastore: @meshbluDatastore
+      meshbluDatastore: @datastore
       uuid: fromUuid
-
+      
     try
       deviceQuery = JSON.parse request.rawData
     catch error

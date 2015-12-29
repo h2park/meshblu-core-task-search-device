@@ -9,19 +9,19 @@ describe 'SearchDevice', ->
     @auth = uuid: 'archaeologist'
     @uuidAliasResolver = resolve: (uuid, callback) => callback(null, uuid)
 
-    @meshbluDatastore = new Datastore
+    @datastore = new Datastore
       database: mongojs('meshblu-core-task-search-device')
       moment: moment
       collection: 'devices'
 
-    @meshbluDatastore.remove done
+    @datastore.remove done
 
   beforeEach ->
-    @sut = new SearchDevice {@meshbluDatastore, @uuidAliasResolver}
+    @sut = new SearchDevice {@datastore, @uuidAliasResolver}
 
   describe '->do', ->
     beforeEach 'insert auth device', (done)->
-      @meshbluDatastore.insert @auth, done
+      @datastore.insert @auth, done
     describe 'when called without a query', ->
       beforeEach (done) ->
         request =
@@ -46,7 +46,7 @@ describe 'SearchDevice', ->
           name: 'bitey'
           type: 'dinosaur'
           discoverWhitelist: ['*']
-        @meshbluDatastore.insert [record], done
+        @datastore.insert [record], done
 
       beforeEach (done) ->
         query = type: 'dinosaur'
@@ -87,7 +87,7 @@ describe 'SearchDevice', ->
           name: 'Hidden'
           type: 'dinosaur'
 
-        @meshbluDatastore.insert [velociraptor, trex, hideosaur], done
+        @datastore.insert [velociraptor, trex, hideosaur], done
 
       beforeEach (done) ->
         query = type: 'dinosaur'
@@ -124,7 +124,7 @@ describe 'SearchDevice', ->
 
         allDinosaurs = _.flatten [hiddenDinosaurs, visibleDinosaurs]
 
-        @meshbluDatastore.insert allDinosaurs, done
+        @datastore.insert allDinosaurs, done
 
       beforeEach (done) ->
         query = type: 'dinosaur'
