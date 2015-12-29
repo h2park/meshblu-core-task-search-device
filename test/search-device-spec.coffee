@@ -5,6 +5,7 @@ Datastore = require 'meshblu-core-datastore'
 SearchDevice = require '../'
 _ = require 'lodash'
 describe 'SearchDevice', ->
+  @timeout 10000
   beforeEach (done) ->
     @auth = uuid: 'archaeologist'
     @uuidAliasResolver = resolve: (uuid, callback) => callback(null, uuid)
