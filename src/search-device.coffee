@@ -1,36 +1,37 @@
-http = require 'http'
-_    = require 'lodash'
-async = require 'async'
-DeviceDatastore = require 'meshblu-core-datastore-device'
+http          = require 'http'
+_             = require 'lodash'
+DeviceManager = require 'meshblu-core-manager-device'
 
 class SearchDevice
   constructor: ({@datastore, @uuidAliasResolver}) ->
+    @deviceManager = new DeviceManager {@datastore, @uuidAliasResolver}
 
   do: (request, callback) =>
     {fromUuid, auth} = request.metadata
     fromUuid ?= auth.uuid
 
-    @deviceDatastore = new DeviceDatastore
-      meshbluDatastore: @datastore
-      uuid: fromUuid
-      
     try
-      deviceQuery = JSON.parse request.rawData
+      query = JSON.parse request.rawData
     catch error
-      return callback null, @_getEmptyResponse 422
+      return callback null, @_getEmptyResponse request, 422
 
-    @deviceDatastore.find(deviceQuery, (error, devices) =>
-      response =
-        metadata: code: 200
-        rawData: JSON.stringify devices
+    @deviceManager.search {uuid: fromUuid, query}, (error, devices) =>
+      return callback error if error?
+      callback null, @_getDevicesResponse request, 200, devices
 
-      callback null, response
-    ).limit(1000)
-
-  _getEmptyResponse: (code) =>
+  _getEmptyResponse: (request, code) =>
     response =
       metadata:
+        responseId: request.metadata.responseId
         code: code
         status: http.STATUS_CODES[code]
+
+  _getDevicesResponse: (request, code, devices) =>
+    response =
+      metadata:
+        responseId: request.metadata.responseId
+        code: code
+        status: http.STATUS_CODES[code]
+      rawData: JSON.stringify devices
 
 module.exports = SearchDevice

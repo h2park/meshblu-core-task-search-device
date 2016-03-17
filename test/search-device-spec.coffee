@@ -1,9 +1,8 @@
-mongojs = require 'mongojs'
-moment = require 'moment'
-Datastore = require 'meshblu-core-datastore'
-
+_            = require 'lodash'
+mongojs      = require 'mongojs'
+Datastore    = require 'meshblu-core-datastore'
 SearchDevice = require '../'
-_ = require 'lodash'
+
 describe 'SearchDevice', ->
   @timeout 10000
   beforeEach (done) ->
@@ -12,7 +11,6 @@ describe 'SearchDevice', ->
 
     @datastore = new Datastore
       database: mongojs('meshblu-core-task-search-device')
-      moment: moment
       collection: 'devices'
 
     @datastore.remove done
@@ -23,6 +21,7 @@ describe 'SearchDevice', ->
   describe '->do', ->
     beforeEach 'insert auth device', (done)->
       @datastore.insert @auth, done
+
     describe 'when called without a query', ->
       beforeEach (done) ->
         request =
