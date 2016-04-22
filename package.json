@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-search-device",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Search for devices, using the unstoppable Meshblu CORE",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "chai-subset": "^1.2.0",
     "coffee-coverage": "^0.7.0",
     "istanbul": "^0.4.1",
-    "meshblu-core-datastore": "^2.3.1",
+    "meshblu-core-datastore": "^4.0.0",
     "mocha": "^2.3.4",
     "mocha-istanbul": "^0.2.0",
     "moment": "^2.10.6",

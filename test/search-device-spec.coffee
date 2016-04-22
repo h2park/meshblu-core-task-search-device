@@ -9,11 +9,12 @@ describe 'SearchDevice', ->
     @auth = uuid: 'archaeologist'
     @uuidAliasResolver = resolve: (uuid, callback) => callback(null, uuid)
 
+    database = mongojs 'meshblu-core-task-search-device', ['devices']
     @datastore = new Datastore
-      database: mongojs('meshblu-core-task-search-device')
+      database: database
       collection: 'devices'
 
-    @datastore.remove done
+    database.devices.remove done
 
   beforeEach ->
     @sut = new SearchDevice {@datastore, @uuidAliasResolver}
