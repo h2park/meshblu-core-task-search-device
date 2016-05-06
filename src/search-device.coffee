@@ -7,7 +7,7 @@ class SearchDevice
     @deviceManager = new DeviceManager {@datastore, @uuidAliasResolver}
 
   do: (request, callback) =>
-    {fromUuid, auth} = request.metadata
+    {fromUuid, auth, projection} = request.metadata
     fromUuid ?= auth.uuid
 
     try
@@ -15,7 +15,7 @@ class SearchDevice
     catch error
       return callback null, @_getEmptyResponse request, 422
 
-    @deviceManager.search {uuid: fromUuid, query}, (error, devices) =>
+    @deviceManager.search {uuid: fromUuid, query, projection}, (error, devices) =>
       return callback error if error?
       callback null, @_getDevicesResponse request, 200, devices
 
