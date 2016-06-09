@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-search-device",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "description": "Search for devices, using the unstoppable Meshblu CORE",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,6 @@
   "dependencies": {
     "coffee-script": "^1.10.0",
     "lodash": "^3.10.1",
-    "meshblu-core-manager-device": "^2.4.0"
+    "meshblu-core-manager-device": "^2.4.6"
   }
 }
