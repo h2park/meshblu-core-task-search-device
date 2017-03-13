@@ -1,5 +1,4 @@
 http          = require 'http'
-_             = require 'lodash'
 DeviceManager = require 'meshblu-core-manager-device'
 
 class SearchDevice
@@ -12,7 +11,7 @@ class SearchDevice
 
     try
       query = JSON.parse request.rawData
-    catch error
+    catch
       return callback null, @_getEmptyResponse request, 422
 
     @deviceManager.search {uuid: fromUuid, query, projection}, (error, devices) =>
@@ -20,18 +19,20 @@ class SearchDevice
       callback null, @_getDevicesResponse request, 200, devices
 
   _getEmptyResponse: (request, code) =>
-    response =
+    return {
       metadata:
         responseId: request.metadata.responseId
         code: code
         status: http.STATUS_CODES[code]
+    }
 
   _getDevicesResponse: (request, code, devices) =>
-    response =
+    return {
       metadata:
         responseId: request.metadata.responseId
         code: code
         status: http.STATUS_CODES[code]
       rawData: JSON.stringify devices
+    }
 
 module.exports = SearchDevice
